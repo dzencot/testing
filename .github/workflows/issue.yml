@@ -1,15 +1,71 @@
 on:
   issues:
     types: [opened, edited]
-
 jobs:
-  auto_close_issues:
+  check-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Automatically close issues that don't follow the issue template
-        uses: lucasbento/auto-close-issues@v1.0.2
+      - name: Check Issue title
+        run: |
+          if [[ "${{ github.event.issue.title }}" =~ ^Bug:.* ]]; then
+              echo "ISSUE_TITLE_VALID=true" >> $GITHUB_ENV
+          else
+              echo "ISSUE_TITLE_VALID=false" >> $GITHUB_ENV
+          fi
+      - name: Check Issue body
+        run: |
+          re='## Summary
+            (.*)
+            ## Environment
+            (.*)
+            ## Steps to reproduce
+            (.*)
+            ## Expected result
+            (.*)
+            ## Actual result
+            (.*)'
+          if [[ "${{ github.event.issue.body }}" =~ $re ]]; then
+              echo "ISSUE_BODY_VALID=true" >> $GITHUB_ENV
+          else
+              echo "ISSUE_BODY_VALID=false" >> $GITHUB_ENV
+          fi
+
+      - name: debug
+        run: |
+          echo "${{ env.ISSUE_BODY_VALID }}"
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        if: ${{ env.ISSUE_BODY_VALID != 'true' }}
         with:
-          github-token: ${{ secrets.TOKEN }}
-          issue-close-message: "@${issue.user.login}: hello! :wave:\n\nThis issue is being automatically closed because it does not follow the issue template." # optional property
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Пожалуйста, используйте шаблон для баг-репорта
+
+            Заголовок: `Bug: заголовок`
+
+            ```markdown
+            ## Summary
+            краткое, емкое и понятное описание ошибки
+            ## Environment
+            ссылка на билд/коммит/версия ПО и всего окружения
+            ## Steps to reproduce
+            Полный перечень шагов для воспроизведения
+            ## Expected result
+            какой результат должен был быть без ошибки
+            ## Actual result
+            какой результат получился на самом деле
+            ```
+
+      # - uses: dessant/label-actions@v2
+      #   with:
+      #     github-token: ${{ github.token }}
+      #     config-path: '.github/label-actions.yml'
+
+      # - if: startsWith(github.event.issue.title, 'ABC-') != 'true'
+      #   name: Close Issue
+      #   uses: peter-evans/close-issue@v2
+      #   with:
+      #     comment: |
+      #       Issue title must start with 'ABC-'.
+      #       Auto-closing this issue.
