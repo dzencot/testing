@@ -1,6 +1,8 @@
 ---
 name: |
   Bug:
+about: 
+labels: Bug
 ---
 
 ## Summary
