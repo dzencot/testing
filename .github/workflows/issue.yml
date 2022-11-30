@@ -27,7 +27,7 @@ jobs:
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
-        if: ${{ env.ISSUE_BODY_VALID != 'true' }}
+        if: ${{ env.ISSUE_BODY_VALID != true }}
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
@@ -57,8 +57,8 @@ jobs:
             Какой результат получился на самом деле
             ```
 
-      - if: ${{ env.ISSUE_BODY_VALID == 'true' }}
-        name: Close Issue
+      - name: Close Issue
+        if: ${{ env.ISSUE_BODY_VALID == true }}
         uses: peter-evans/close-issue@v2
         with:
           comment: |
