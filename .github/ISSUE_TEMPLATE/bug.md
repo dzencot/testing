@@ -1,28 +1,26 @@
 ---
 name: Bug
 about: Bug report issue
-labels: bug
 title: |
   Bug:
 ---
 
+## Summary
+
+Короткое описание ошибки
+
 ## Environment
 
-<!-- Run `react-native info` in your terminal and paste its contents here. -->
+Ссылка на билд/коммит/версия ПО и всего окружения
 
-## Upgrading version
+## Steps to reproduce
 
-<!-- Specify to which version you are upgrading to. -->
+Полный перечень шагов для воспроизведения
 
-## Description
+## Expected result
 
-<!--
-  Please describe your issue in detail, include screenshots if needed.
--->
+Какой результат должен был быть без ошибки
 
-## Reproducible demo
+## Actual result
 
-<!--
-  Let other people know how to reproduce the issue. Include a code sample or share a project that reproduces the issue.
-  Please follow the guidelines for providing a minimal example: https://stackoverflow.com/help/mcve.
--->
+Какой результат получился на самом деле
