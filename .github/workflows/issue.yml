@@ -57,11 +57,6 @@ jobs:
             Какой результат получился на самом деле
             ```
 
-      - uses: dessant/label-actions@v2
-        with:
-          github-token: ${{ github.token }}
-          config-path: '.github/label-actions.yml'
-
       - if: ${{ env.ISSUE_BODY_VALID == 'true' }}
         name: Close Issue
         uses: peter-evans/close-issue@v2
