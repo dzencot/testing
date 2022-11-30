@@ -1,7 +1,9 @@
 ---
 name: Bug
-about: Create a question regarding upgrading React Native to a new version.
-labels: ❔Question
+about: Bug report issue
+labels: bug
+title: |
+  Bug:
 ---
 
 ## Environment
