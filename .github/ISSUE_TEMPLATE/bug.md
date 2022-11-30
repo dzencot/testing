@@ -1,26 +1,26 @@
 ---
-name: |
-  Bug:
-about: 
-labels: Bug
+name: ❔Create a question
+about: Create a question regarding upgrading React Native to a new version.
+labels: ❔Question
 ---
-
-## Summary
-
-Короткое описание ошибки
 
 ## Environment
 
-Ссылка на билд/коммит/версия ПО и всего окружения
+<!-- Run `react-native info` in your terminal and paste its contents here. -->
 
-## Steps to reproduce
+## Upgrading version
 
-Полный перечень шагов для воспроизведения
+<!-- Specify to which version you are upgrading to. -->
 
-## Expected result
+## Description
 
-Какой результат должен был быть без ошибки
+<!--
+  Please describe your issue in detail, include screenshots if needed.
+-->
 
-## Actual result
+## Reproducible demo
 
-Какой результат получился на самом деле
+<!--
+  Let other people know how to reproduce the issue. Include a code sample or share a project that reproduces the issue.
+  Please follow the guidelines for providing a minimal example: https://stackoverflow.com/help/mcve.
+-->
