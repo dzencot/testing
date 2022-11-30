@@ -14,16 +14,7 @@ jobs:
           fi
       - name: Check Issue body
         run: |
-          re='## Summary
-            (.*)
-            ## Environment
-            (.*)
-            ## Steps to reproduce
-            (.*)
-            ## Expected result
-            (.*)
-            ## Actual result
-            (.*)'
+          re='## Summary\n*(.*)\n*## Environment\n*(.*)\n*## Steps to reproduce\n*(.*)\n*## Expected result\n*(.*)\n*## Actual result\n*(.*)'
           if [[ "${{ github.event.issue.body }}" =~ $re ]]; then
               echo "ISSUE_BODY_VALID=true" >> $GITHUB_ENV
           else
