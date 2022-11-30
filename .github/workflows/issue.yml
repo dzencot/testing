@@ -46,26 +46,25 @@ jobs:
 
             ```markdown
             ## Summary
-            краткое, емкое и понятное описание ошибки
+            Короткое описание ошибки
             ## Environment
-            ссылка на билд/коммит/версия ПО и всего окружения
+            Ссылка на билд/коммит/версия ПО и всего окружения
             ## Steps to reproduce
             Полный перечень шагов для воспроизведения
             ## Expected result
-            какой результат должен был быть без ошибки
+            Какой результат должен был быть без ошибки
             ## Actual result
-            какой результат получился на самом деле
+            Какой результат получился на самом деле
             ```
 
-      # - uses: dessant/label-actions@v2
-      #   with:
-      #     github-token: ${{ github.token }}
-      #     config-path: '.github/label-actions.yml'
+      - uses: dessant/label-actions@v2
+        with:
+          github-token: ${{ github.token }}
+          config-path: '.github/label-actions.yml'
 
-      # - if: startsWith(github.event.issue.title, 'ABC-') != 'true'
-      #   name: Close Issue
-      #   uses: peter-evans/close-issue@v2
-      #   with:
-      #     comment: |
-      #       Issue title must start with 'ABC-'.
-      #       Auto-closing this issue.
+      - if: ${{ env.ISSUE_BODY_VALID == 'true' }}
+        name: Close Issue
+        uses: peter-evans/close-issue@v2
+        with:
+          comment: |
+            Баг-репорт корректный. Успешно закрыто!
